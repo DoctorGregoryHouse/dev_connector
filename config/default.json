@@ -1,0 +1,4 @@
+{
+    "mongoURI":"mongodb+srv://Ruben:zX6GGhLPso9MVL4t@gc-cluster-2tzna.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "yallusgallusfidibus"
+}
