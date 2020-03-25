@@ -64,7 +64,6 @@ export const Register = ({ setAlert, register }) => {
                         type="password"
                         placeholder="Password"
                         name="password"
-                        minLength="8"
                         autoComplete="off"
                         value={password}
                         onChange={e => onChange(e)}
@@ -76,7 +75,6 @@ export const Register = ({ setAlert, register }) => {
                         type="password"
                         placeholder="Confirm Password"
                         name="password2"
-                        minLength="8"
                         autoComplete="off"
                         value={password2}
                         onChange={e => onChange(e)}
