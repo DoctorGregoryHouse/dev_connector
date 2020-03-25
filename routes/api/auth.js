@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 //@route GET api/auth
-//@desc  Text route
+//@desc  Get users
 //access Public
 router.get('/', auth, async (req, res) => {
     try {
@@ -40,14 +40,14 @@ router.post(
             if (!user) {
                 return res
                     .status(400)
-                    .json({ errors: [{ message: 'Invalid Credentials' }] });
+                    .json({ errors: [{ msg: 'Invalid Credentials' }] });
             }
 
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
                 return res
                     .status(400)
-                    .json({ errors: [{ mesasge: 'Invalid Credentials' }] });
+                    .json({ errors: [{ msg: 'Invalid Credentials' }] });
             }
 
             const payload = {
