@@ -77,7 +77,10 @@ router.post(
         if (status) profileFields.status = status;
         if (githubusername) profileFields.githubusername = githubusername;
         if (skills) {
-            profileFields.skills = skills.split(',').map(skill => skill.trim());
+            profileFields.skills = skills
+                .toString()
+                .split(',')
+                .map(skill => skill.trim());
         }
         profileFields.social = {};
         if (youtube) profileFields.social.youtube = youtube;
@@ -132,7 +135,6 @@ router.get('/user/:user_id', async (req, res) => {
         const profile = await Profile.findOne({
             id: req.params.user_id
         }).populate('user', ['name', 'avatar']);
-        console.log(req.params.user_id);
         if (!profile) {
             return res.status(400).json({ msg: 'Profile not found' });
         }
