@@ -7,7 +7,7 @@ const config = require('config');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
-const Post = require('../../models/Post'); 
+const Post = require('../../models/Post');
 
 //@route GET api/profile/me
 //@desc  Get current users profile
@@ -127,7 +127,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-//@route GET api/profile
+//@route GET api/profile/user/:user_id
 //@desc  Get profile by user id
 //access Public
 router.get('/user/:user_id', async (req, res) => {
@@ -154,7 +154,7 @@ router.get('/user/:user_id', async (req, res) => {
 router.delete('/', auth, async (req, res) => {
     try {
         //Remove user posts
-        await Post.deleteMany({user: req.user.id}); 
+        await Post.deleteMany({ user: req.user.id });
         //Remove profile
         await Profile.findOneAndRemove({ user: req.user.id });
         //Remove user
@@ -333,7 +333,7 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
     }
 });
 
-//@route GET api/profile/github/:username
+//@route GET api/profile/hub/:username
 //@desc  Get user repos from Github
 //access Public
 router.get('/github/:username', (req, res) => {
@@ -351,7 +351,9 @@ router.get('/github/:username', (req, res) => {
         request(options, (error, response, body) => {
             if (error) console.error(error);
             if (response.statusCode !== 200) {
-                return res.status(404).json({ msg: 'No Github profile found' });
+                return res
+                    .status(404)
+                    .json({ msg: 'No Github profile found' });
             }
             res.json(JSON.parse(body));
         });
