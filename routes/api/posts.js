@@ -27,7 +27,9 @@ router.post(
         }
 
         try {
-            const user = await User.findById(req.user.id).select('-password');
+            const user = await User.findById(req.user.id).select(
+                '-password'
+            );
             const newPost = new Post({
                 text: req.body.text,
                 name: user.name,
@@ -114,8 +116,9 @@ router.put('/like/:id', auth, async (req, res) => {
 
         //Check if the post has already been liked
         if (
-            post.likes.filter(like => like.user.toString() === req.user.id)
-                .length > 0
+            post.likes.filter(
+                like => like.user.toString() === req.user.id
+            ).length > 0
         ) {
             return res.status(400).json({ msg: 'Post already liked' });
         }
@@ -137,10 +140,13 @@ router.put('/unlike/:id', auth, async (req, res) => {
 
         //Check if the post has already been liked
         if (
-            post.likes.filter(like => like.user.toString() === req.user.id)
-                .length === 0
+            post.likes.filter(
+                like => like.user.toString() === req.user.id
+            ).length === 0
         ) {
-            return res.status(400).json({ msg: 'Post has not yet been liked' });
+            return res
+                .status(400)
+                .json({ msg: 'Post has not yet been liked' });
         }
         const removeIndex = post.likes
             .map(like => like.user.toString())
@@ -175,7 +181,9 @@ router.post(
         }
 
         try {
-            const user = await User.findById(req.user.id).select('-password');
+            const user = await User.findById(req.user.id).select(
+                '-password'
+            );
             const post = await Post.findById(req.params.id);
             if (!post) {
                 return res.status(404).json({ msg: 'Post not found' });

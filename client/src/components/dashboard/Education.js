@@ -2,10 +2,9 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 import { connect } from 'react-redux';
-import {deleteEducation} from '../../actions/profile'
+import { deleteEducation } from '../../actions/profile';
 
-
-const Education = ({education, deleteEducation }) => {
+const Education = ({ education, deleteEducation }) => {
     const educations = education.map(edu => (
         <tr key={edu._id}>
             <td> {edu.school} </td>
@@ -19,7 +18,12 @@ const Education = ({education, deleteEducation }) => {
                 )}
             </td>
             <td>
-                <button onClick={e => deleteEducation(edu._id)} className="btn btn-danger">Delete</button>
+                <button
+                    onClick={e => deleteEducation(edu._id)}
+                    className="btn btn-danger"
+                >
+                    Delete
+                </button>
             </td>
         </tr>
     ));
@@ -27,12 +31,12 @@ const Education = ({education, deleteEducation }) => {
         <Fragment>
             <h2 className="my-2">Education Credentials</h2>
             <table className="table">
-                <tr>
+                <thead>
                     <th>Company</th>
                     <th className="hide-sm">Title</th>
                     <th className="hide-sm">Years</th>
                     <th />
-                </tr>
+                </thead>
                 <tbody>{educations}</tbody>
             </table>
         </Fragment>
@@ -44,4 +48,4 @@ Education.propTypes = {
     deleteEducation: PropTypes.func.isRequired
 };
 
-export default connect(null,{deleteEducation})(Education);
+export default connect(null, { deleteEducation })(Education);

@@ -133,7 +133,7 @@ router.get('/', async (req, res) => {
 router.get('/user/:user_id', async (req, res) => {
     try {
         const profile = await Profile.findOne({
-            id: req.params.user_id
+            user: req.params.user_id
         }).populate('user', ['name', 'avatar']);
         if (!profile) {
             return res.status(400).json({ msg: 'Profile not found' });
@@ -315,7 +315,7 @@ router.put(
 );
 
 //@route DELETE api/profile/education/:edu_id
-//@desc  Delte profile education from Profile
+//@desc  Delete profile education from Profile
 //access Private
 router.delete('/education/:edu_id', auth, async (req, res) => {
     try {

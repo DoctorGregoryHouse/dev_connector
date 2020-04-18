@@ -53,9 +53,9 @@ export const getAllProfiles = () => async dispatch => {
 
 //get profile by ID
 export const getProfileById = userId => async dispatch => {
+    console.log(userId);
     try {
         const res = await axios.get(`/api/profile/user/${userId}`);
-
         dispatch({
             type: GET_PROFILE,
             payload: res.data
@@ -68,6 +68,9 @@ export const getProfileById = userId => async dispatch => {
                 status: err.response.status
             }
         });
+        if (!err.msg) {
+            console.log(err);
+        }
     }
 };
 
@@ -259,7 +262,7 @@ export const deleteExperience = id => async dispatch => {
 export const deleteAccount = id => async dispatch => {
     if (window.confirm('Are you sure ? ')) {
         try {
-            const res = await axios.delete('/api/profile');
+            await axios.delete('/api/profile');
 
             dispatch({ type: CLEAR_PROFILE });
             dispatch({ type: ACCOUNT_DELETED });
