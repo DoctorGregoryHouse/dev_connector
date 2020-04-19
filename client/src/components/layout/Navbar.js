@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
@@ -12,6 +12,9 @@ export const Navbar = ({
         <ul>
             <li>
                 <Link to="/profiles">Developers</Link>
+            </li>
+            <li>
+                <Link to="/posts">Posts</Link>
             </li>
             <li>
                 <Link to="/dashboard">
@@ -66,4 +69,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { logout })(Navbar);
+export default withRouter(connect(mapStateToProps, { logout })(Navbar));
